@@ -7,6 +7,7 @@
 //
 
 #import "GLField.h"
+#import "GLCell.h"
 
 #define RANDOM YES
 
@@ -20,9 +21,11 @@
         self.cellRectSize = cellRectSize;
         self.parentView = parentView;
         self.cells = [NSMutableArray new];
-        for (int y = 0; y < self.parentView.frame.size.width; y+=self.cellRectSize ){
+        _fieldSize.height = (int)(self.parentView.frame.size.height / cellRectSize);
+        _fieldSize.width = (int)(self.parentView.frame.size.width / cellRectSize);
+        for (int y = 0; y < _fieldSize.height; y++ ){
             NSMutableArray *newCellRow = [NSMutableArray new];
-            for (int x = 0; x < self.parentView.frame.size.height; x+=self.cellRectSize){
+            for (int x = 0; x < _fieldSize.width; x++){
                 BOOL newCellState = (RANDOM)?arc4random()%2:NO;
                 CGRect newCellFrame = CGRectMake(x * cellRectSize, y * cellRectSize, cellRectSize, cellRectSize);
                 UIView *newCellView = [[UIView alloc] initWithFrame: newCellFrame];
@@ -46,19 +49,21 @@
 }
 
 - (void) drawField{
-    for (int x = 0; x < self.parentView.frame.size.width; x+=self.cellRectSize ){
-        for (int y = 0; y < self.parentView.frame.size.height; y+=self.cellRectSize){
-            [[[self.cells objectAtIndex:x] objectAtIndex:y] draw];
+    for (int x = 0; x < _fieldSize.width; x++ ){
+        for (int y = 0; y < _fieldSize.height; y++){
+            [[[self.cells objectAtIndex:y] objectAtIndex:x] draw];
         }
     }
+    [[self parentView] setNeedsDisplay];
 }
 
 - (void) evolveFieldOnce{
-    for (int x = 0; x < self.parentView.frame.size.width; x+=self.cellRectSize ){
-        for (int y = 0; y < self.parentView.frame.size.height; y+=self.cellRectSize){
-            [[[self.cells objectAtIndex:x] objectAtIndex:y] evolve];
+    for (int x = 0; x < _fieldSize.width; x++ ){
+        for (int y = 0; y < _fieldSize.height; y++){
+            [[[self.cells objectAtIndex:y] objectAtIndex:x] evolve];
         }
     }
+    [self drawField];
 }
 
 

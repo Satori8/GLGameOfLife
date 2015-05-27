@@ -11,6 +11,7 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *gameOfLifeView;
 
 @end
 
@@ -21,11 +22,15 @@
     
     self.fieldGameOfLife = [[GLField alloc] initWithCellRectSize:32
                                                   RandomizeField:YES
-                                                      ParentView:self.view];
+                                                      ParentView:self.gameOfLifeView];
     
     
     [[self fieldGameOfLife] drawField];
     [[self fieldGameOfLife] startEvolvingProcess];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.fieldGameOfLife evolveFieldOnce];
 }
 
 

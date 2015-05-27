@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GLCell.h"
+@class GLCell;
+
 @import UIKit;
 
 @interface GLField : NSObject
@@ -15,6 +16,7 @@
 @property (nonatomic) NSMutableArray *cells;
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) int cellRectSize;
+@property (nonatomic) CGSize fieldSize;
 @property (nonatomic) UIView *parentView;
 
 - (id)initWithCellRectSize:(int) cellRectSize
