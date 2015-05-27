@@ -14,6 +14,8 @@
 		1F3AEFBE1B153789008D17B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3AEFBD1B153789008D17B1 /* Images.xcassets */; };
 		1F3AEFC11B153789008D17B1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3AEFBF1B153789008D17B1 /* LaunchScreen.xib */; };
 		1F3AEFCD1B153789008D17B1 /* GLGameOfLifeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3AEFCC1B153789008D17B1 /* GLGameOfLifeTests.m */; };
+		1F3AEFDB1B153840008D17B1 /* GLCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3AEFDA1B153840008D17B1 /* GLCell.m */; };
+		1F3AEFDE1B15390F008D17B1 /* GLField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3AEFDD1B15390F008D17B1 /* GLField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		1F3AEFC61B153789008D17B1 /* GLGameOfLifeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GLGameOfLifeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3AEFCB1B153789008D17B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F3AEFCC1B153789008D17B1 /* GLGameOfLifeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLGameOfLifeTests.m; sourceTree = "<group>"; };
+		1F3AEFD91B153840008D17B1 /* GLCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCell.h; sourceTree = "<group>"; };
+		1F3AEFDA1B153840008D17B1 /* GLCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLCell.m; sourceTree = "<group>"; };
+		1F3AEFDC1B15390F008D17B1 /* GLField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLField.h; sourceTree = "<group>"; };
+		1F3AEFDD1B15390F008D17B1 /* GLField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,13 +87,9 @@
 		1F3AEFAF1B153789008D17B1 /* GLGameOfLife */ = {
 			isa = PBXGroup;
 			children = (
-				1F3AEFB41B153789008D17B1 /* AppDelegate.h */,
-				1F3AEFB51B153789008D17B1 /* AppDelegate.m */,
-				1F3AEFB71B153789008D17B1 /* ViewController.h */,
-				1F3AEFB81B153789008D17B1 /* ViewController.m */,
-				1F3AEFBA1B153789008D17B1 /* Main.storyboard */,
-				1F3AEFBD1B153789008D17B1 /* Images.xcassets */,
-				1F3AEFBF1B153789008D17B1 /* LaunchScreen.xib */,
+				1F3AEFD81B1537CD008D17B1 /* Controller */,
+				1F3AEFD71B1537B5008D17B1 /* View */,
+				1F3AEFD61B1537A1008D17B1 /* Model */,
 				1F3AEFB01B153789008D17B1 /* Supporting Files */,
 			);
 			path = GLGameOfLife;
@@ -96,6 +98,8 @@
 		1F3AEFB01B153789008D17B1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1F3AEFB41B153789008D17B1 /* AppDelegate.h */,
+				1F3AEFB51B153789008D17B1 /* AppDelegate.m */,
 				1F3AEFB11B153789008D17B1 /* Info.plist */,
 				1F3AEFB21B153789008D17B1 /* main.m */,
 			);
@@ -117,6 +121,36 @@
 				1F3AEFCB1B153789008D17B1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F3AEFD61B1537A1008D17B1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1F3AEFD91B153840008D17B1 /* GLCell.h */,
+				1F3AEFDA1B153840008D17B1 /* GLCell.m */,
+				1F3AEFDC1B15390F008D17B1 /* GLField.h */,
+				1F3AEFDD1B15390F008D17B1 /* GLField.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1F3AEFD71B1537B5008D17B1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1F3AEFBA1B153789008D17B1 /* Main.storyboard */,
+				1F3AEFBD1B153789008D17B1 /* Images.xcassets */,
+				1F3AEFBF1B153789008D17B1 /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		1F3AEFD81B1537CD008D17B1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F3AEFB71B153789008D17B1 /* ViewController.h */,
+				1F3AEFB81B153789008D17B1 /* ViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +255,8 @@
 			files = (
 				1F3AEFB91B153789008D17B1 /* ViewController.m in Sources */,
 				1F3AEFB61B153789008D17B1 /* AppDelegate.m in Sources */,
+				1F3AEFDE1B15390F008D17B1 /* GLField.m in Sources */,
+				1F3AEFDB1B153840008D17B1 /* GLCell.m in Sources */,
 				1F3AEFB31B153789008D17B1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

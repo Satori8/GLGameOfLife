@@ -8,7 +8,9 @@
 
 #import "ViewController.h"
 
+
 @interface ViewController ()
+
 
 @end
 
@@ -16,8 +18,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.fieldGameOfLife = [[GLField alloc] initWithCellRectSize:32
+                                                  RandomizeField:YES
+                                                      ParentView:self.view];
+    
+    
+    [[self fieldGameOfLife] drawField];
+    [[self fieldGameOfLife] startEvolvingProcess];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

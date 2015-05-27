@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLField.h"
 
 @interface ViewController : UIViewController
 
+@property (nonatomic) GLField *fieldGameOfLife;
 
 @end
 
