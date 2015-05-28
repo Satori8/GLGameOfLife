@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#define GLConwayMode 1
+#define GLCyclicMode 2
 @class GLCell;
+
 
 @import UIKit;
 
@@ -18,10 +21,15 @@
 @property (nonatomic) int cellRectSize;
 @property (nonatomic) CGSize fieldSize;
 @property (nonatomic) UIView *parentView;
+@property (nonatomic) int evolutionMode;
+@property (nonatomic) NSArray *palette;
 
 - (id)initWithCellRectSize:(int) cellRectSize
             RandomizeField:(BOOL) randomField
-                ParentView:(UIView *) parentView;
+                ParentView:(UIView *) parentView
+                      Mode:(int) evolutionMode
+             PaletteColor1:(CIColor *) color1
+             PaletteColor2:(CIColor *) color2;
 - (void) startEvolvingProcess;
 - (void) evolveFieldOnce;
 - (void) drawField;

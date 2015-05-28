@@ -8,54 +8,101 @@
 
 #import "GLCell.h"
 #import "GLField.h"
-
+@import UIKit;
 @implementation GLCell
 
-- (id)initWithState: (BOOL) alive
+- (id)initWithState: (int) state
            Location: (CGPoint) location
         ParentField: (GLField *) parentField
            CellView: (UIView *) cellView
 {
     self = [super init];
     if (self) {
-        self.location = location;
-        self.alive = alive;
-        self.parentField = parentField;
-        cellView.backgroundColor = (alive)?[UIColor blackColor]:[UIColor whiteColor];
-        self.cellView = cellView;
-    
+        _location = location;
+        _state = state;
+        _parentField = parentField;
+        _cellView = cellView;
+        _color = [parentField.palette objectAtIndex:state];
     }
     return self;
 }
 
-- (void) evolve{
-    int aliveNeighbours = 0;
-    for (int x = -1; x <= 1; x++) {
-        for (int y = -1; y <= 1; y++){
+- (NSSet *) getNeighboursInRange: (int) range{
+    NSMutableSet *result = [NSMutableSet new];
+    for (int x = -range; x <= range; x++) {
+        for (int y = -range; y <= range; y++){
             int tx = self.location.x - x;
             int ty = self.location.y - y;
-            if (tx > 0 && ty > 0 && tx < self.parentField.fieldSize.width && ty < self.parentField.fieldSize.height && !(x==0 && y==0)) {
+            if (tx >= 0 && ty >= 0 && tx < self.parentField.fieldSize.width && ty < self.parentField.fieldSize.height && !(x==0 && y==0)) {
                 GLCell *neighbour = [[self.parentField.cells objectAtIndex:ty] objectAtIndex:tx];
-                if (neighbour.alive) {
-                    aliveNeighbours++;
-                }
+                [result addObject:neighbour];
             }
         }
     }
-    if(self.alive){
-        if(aliveNeighbours!=2 && aliveNeighbours != 3){
-            self.alive = NO;
+    
+    return result;
+}
+
+- (void) evolve{
+    switch (self.parentField.evolutionMode) {
+        case GLConwayMode:
+            [self conwayRules];
+            break;
+            
+        case GLCyclicMode:
+            [self cyclicRules];
+            break;
+            
+        default:
+            [self conwayRules];
+            break;
+    }
+}
+
+
+- (void) cyclicRules{
+    int treshold = 1;
+    int N = 0;
+
+    for(GLCell *neighbour in [self getNeighboursInRange:1]){
+        if (neighbour.state > _state ||
+            (_state == _parentField.palette.count-1 && neighbour.state == 0)) {
+            N++;
         }
-    }else{
-        if(aliveNeighbours==3){
-            self.alive = YES;
+        if(N>treshold){
+            _state++;
+            if (_state>_parentField.palette.count-1) {
+                _state=0;
+            }
         }
     }
 }
 
+- (void) conwayRules{
+    int aliveNeighbours = 0;
+    for(GLCell *neighbour in [self getNeighboursInRange:1]){
+        if (neighbour.state) {
+            aliveNeighbours++;
+        }
+    }
+    
+    if(self.state){
+        if(aliveNeighbours!=2 && aliveNeighbours != 3){
+            _state = 0;
+        }
+    }else{
+        if(aliveNeighbours==3){
+            _state = 1;
+        }
+    }
+}
+
+
+
 - (void) draw{
-    self.cellView.backgroundColor = (self.alive)?[UIColor blackColor]:[UIColor whiteColor];
-    [self.cellView setNeedsDisplay];
+     _color = [_parentField.palette objectAtIndex:_state];
+    _cellView.backgroundColor = _color;
+    [_cellView setNeedsDisplay];
 }
 
 @end

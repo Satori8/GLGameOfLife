@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#define GLConwayMode 1
 
 @interface ViewController ()
 
@@ -19,18 +19,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated{
     
-    self.fieldGameOfLife = [[GLField alloc] initWithCellRectSize:32
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+    //--wtf?
+    CGRect fieldFrame = self.view.frame;
+    [self.gameOfLifeView setFrame:fieldFrame];
+    self.fieldGameOfLife = [[GLField alloc] initWithCellRectSize:2
                                                   RandomizeField:YES
-                                                      ParentView:self.gameOfLifeView];
-    
-    
+                                                      ParentView:self.gameOfLifeView
+                                                            Mode:GLCyclicMode
+                                                   PaletteColor1:[CIColor colorWithRed:1
+                                                                                 green:1
+                                                                                  blue:0]
+                                                   PaletteColor2:[CIColor colorWithRed:0
+                                                                                 green:1
+                                                                                  blue:0]];
     [[self fieldGameOfLife] drawField];
-    [[self fieldGameOfLife] startEvolvingProcess];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.fieldGameOfLife evolveFieldOnce];
+    [[self fieldGameOfLife] startEvolvingProcess];
 }
 
 
