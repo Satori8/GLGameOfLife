@@ -27,7 +27,7 @@
     return self;
 }
 
-- (NSSet *) getNeighboursInRange: (int) range{
+- (NSSet *) getMooreNeighboursInRange: (int) range{
     NSMutableSet *result = [NSMutableSet new];
     for (int x = -range; x <= range; x++) {
         for (int y = -range; y <= range; y++){
@@ -40,6 +40,11 @@
         }
     }
     
+    return result;
+}
+
+- (NSSet *) getVonNeumanNeighboursInRange: (int) range{
+    NSMutableSet *result = [NSMutableSet new];
     return result;
 }
 
@@ -61,10 +66,10 @@
 
 
 - (void) cyclicRules{
-    int treshold = 1;
+    int treshold = 2;
     int N = 0;
     
-    for(GLCell *neighbour in [self getNeighboursInRange:1]){
+    for(GLCell *neighbour in [self getMooreNeighboursInRange:2]){
         if (_state+1 == neighbour.state ||
             (_state == _parentField.palette.count-1 && neighbour.state == 0)) {
             N++;
@@ -80,7 +85,7 @@
 
 - (void) conwayRules{
     int aliveNeighbours = 0;
-    for(GLCell *neighbour in [self getNeighboursInRange:1]){
+    for(GLCell *neighbour in [self getMooreNeighboursInRange:1]){
         if (neighbour.state) {
             aliveNeighbours++;
         }
