@@ -448,6 +448,7 @@
 				1F3AEFD21B153789008D17B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F3AEFD31B153789008D17B1 /* Build configuration list for PBXNativeTarget "GLGameOfLifeTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +457,7 @@
 				1F3AEFD51B153789008D17B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

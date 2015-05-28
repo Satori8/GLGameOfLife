@@ -48,17 +48,17 @@
             break;
             
         case GLCyclicMode:
-            result = (NSMutableArray*)@[[UIColor colorWithRed:1 green:0 blue:0 alpha:0],
-                       [CIColor colorWithRed:0.5 green:0.5 blue:0 alpha:0],
-                       [CIColor colorWithRed:0 green:1 blue:0.5],
-                       [CIColor colorWithRed:0 green:0 blue:1],
-                       [CIColor colorWithRed:0.5 green:0 blue:0.5],
-                       [CIColor colorWithRed:1 green:1 blue:0],
-                       [CIColor colorWithRed:1 green:0 blue:1],
-                       [CIColor colorWithRed:0 green:1 blue:0]];
-//            result = [self generatePaletteFromColor1:color1
-//                                            ToColor2:color2
-//                                                Size:8];
+            result = (NSMutableArray*)@[[UIColor redColor],
+                                        [UIColor orangeColor],
+                                        [UIColor yellowColor],
+                                        [UIColor greenColor],
+                                        [UIColor cyanColor],
+                                        [UIColor blueColor],
+                                        [UIColor purpleColor],
+                                        [UIColor magentaColor]];
+            //            result = [self generatePaletteFromColor1:color1
+            //                                            ToColor2:color2
+            //                                                Size:8];
             break;
             
             

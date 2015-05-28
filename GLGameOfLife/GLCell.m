@@ -63,17 +63,17 @@
 - (void) cyclicRules{
     int treshold = 1;
     int N = 0;
-
+    
     for(GLCell *neighbour in [self getNeighboursInRange:1]){
-        if (neighbour.state > _state ||
+        if (_state+1 == neighbour.state ||
             (_state == _parentField.palette.count-1 && neighbour.state == 0)) {
             N++;
         }
-        if(N>treshold){
-            _state++;
-            if (_state>_parentField.palette.count-1) {
-                _state=0;
-            }
+    }
+    if(N>treshold){
+        _state++;
+        if(_state > _parentField.palette.count - 1){
+            _state = 0;
         }
     }
 }
@@ -100,7 +100,7 @@
 
 
 - (void) draw{
-     _color = [_parentField.palette objectAtIndex:_state];
+    _color = [_parentField.palette objectAtIndex:_state];
     _cellView.backgroundColor = _color;
     [_cellView setNeedsDisplay];
 }
