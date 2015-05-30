@@ -31,13 +31,14 @@
     self.fieldGameOfLife = [[GLField alloc] initWithCellRectSize:4
                                                   RandomizeField:YES
                                                       ParentView:self.gameOfLifeView
-                                                            Mode:GLCyclicMode
-                                                   PaletteColor1:[CIColor colorWithRed:1
-                                                                                 green:1
-                                                                                  blue:1]
-                                                   PaletteColor2:[CIColor colorWithRed:0.5
-                                                                                 green:0
-                                                                                  blue:0]];
+                                                   TimerInterval:0.1];
+    self.fieldGameOfLife.evolutionMode = GLCyclicMode;
+    self.fieldGameOfLife.neighbourGird = GLVonNeumannSpace;
+    self.fieldGameOfLife.cyclicTreshold = 1;
+    self.fieldGameOfLife.neighbourRange = 1;
+    self.fieldGameOfLife.palette = [self.fieldGameOfLife generateCyclicPalette:9];
+//    self.fieldGameOfLife.palette = @[[UIColor whiteColor], [UIColor blackColor]];
+    [self.fieldGameOfLife generateFieldRandomized:YES];
     [[self fieldGameOfLife] drawField];
 }
 

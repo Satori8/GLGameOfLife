@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #define GLConwayMode 1
 #define GLCyclicMode 2
+#define GLVonNeumannSpace 10
+#define GLMooreSpace      11
 @class GLCell;
 
 
@@ -16,22 +18,28 @@
 
 @interface GLField : NSObject
 
-@property (nonatomic) NSMutableArray *cells;
+@property (nonatomic) NSMutableArray *cellViews;
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) int cellRectSize;
-@property (nonatomic) CGSize fieldSize;
+@property (nonatomic) int fieldWidth;
+@property (nonatomic) int fieldHeight;
 @property (nonatomic) UIView *parentView;
 @property (nonatomic) int evolutionMode;
+@property (nonatomic) int cyclicTreshold;
 @property (nonatomic) NSArray *palette;
+@property (nonatomic) int neighbourGird;
+@property (nonatomic) int neighbourRange;
+@property (nonatomic) float timerInterval;
 
 - (id)initWithCellRectSize:(int) cellRectSize
             RandomizeField:(BOOL) randomField
                 ParentView:(UIView *) parentView
-                      Mode:(int) evolutionMode
-             PaletteColor1:(CIColor *) color1
-             PaletteColor2:(CIColor *) color2;
+             TimerInterval:(float) timerInterval;
+
 - (void) startEvolvingProcess;
 - (void) evolveFieldOnce;
+- (NSMutableArray *) generateCyclicPalette: (int) numberOfColors;
+- (void) generateFieldRandomized:(BOOL)random;
 - (void) drawField;
 
 @end

@@ -16,18 +16,14 @@
 @interface GLCell : NSObject
 
 @property (nonatomic) CGPoint location;
-@property (nonatomic) GLField *parentField;
 @property (nonatomic) UIView *cellView;
 @property (nonatomic) int state;
 @property (nonatomic) UIColor *color;
 
-
-- (void) evolve;
-- (void) draw;
 - (id)initWithState: (int) state
            Location: (CGPoint) location
-        ParentField: (GLField *) parentField
            CellView:(UIView *) cellView;
 
+- (void) draw;
 
 @end
